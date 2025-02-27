@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     public UserModel findByUsername(String username);
 
+
+
     @Modifying
     @Query("UPDATE UserModel u  SET u.username =:username WHERE u.id = :id")
     public UserModel editUsernameById(long id, String username);
