@@ -14,8 +14,28 @@ public class CommentModel {
     @JoinColumn(name = "userModel_id")
     private UserModel userModel;
 
+    @ManyToOne()
+    @JoinColumn(name = "pitchModel_id")
+    private PitchModel pitchModel;
+
     public CommentModel() {
 
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
+    public PitchModel getPitchModel() {
+        return pitchModel;
+    }
+
+    public void setPitchModel(PitchModel pitchModel) {
+        this.pitchModel = pitchModel;
     }
 
     public void setId(Long id) {
