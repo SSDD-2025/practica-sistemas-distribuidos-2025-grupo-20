@@ -10,8 +10,13 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+//non relational variables
+
+    private String username;
+    private String password;
 
 
+//relational variables
     //list of comments
     @OneToMany(mappedBy ="userModel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentModel> commentModel;
@@ -31,7 +36,7 @@ public class UserModel {
     private List<GameModel>  gameModel;
 
 
-    //
+    //List of chats
     @ManyToMany
     @JoinTable(
             name = "user_chat",
@@ -40,9 +45,12 @@ public class UserModel {
     )
     private List<ChatModel> chatModel;
 
-    public List<GameModel> getGameModel() {
-        return gameModel;
+    //constructors
+
+    public UserModel() {
     }
+    public UserModel(String username, String password) {}
+
 
 
 
@@ -87,8 +95,6 @@ public class UserModel {
         this.pitchModel = pitchModel;
     }
 
-    public UserModel() {
-    }
 
     public void setId(Long id) {
         this.id = id;
