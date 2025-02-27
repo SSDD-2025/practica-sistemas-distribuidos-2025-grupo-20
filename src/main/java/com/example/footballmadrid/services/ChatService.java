@@ -1,7 +1,7 @@
-package com.example.footballmadrid.Services;
+package com.example.footballmadrid.services;
 
-import com.example.footballmadrid.Models.ChatModel;
-import com.example.footballmadrid.Repositories.ChatRepository;
+import com.example.footballmadrid.models.ChatModel;
+import com.example.footballmadrid.repositories.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

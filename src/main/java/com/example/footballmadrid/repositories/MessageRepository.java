@@ -1,6 +1,6 @@
-package com.example.footballmadrid.Repositories;
+package com.example.footballmadrid.repositories;
 
-import com.example.footballmadrid.Models.MessageModel;
+import com.example.footballmadrid.models.MessageModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
-package com.example.footballmadrid.Services;
+package com.example.footballmadrid.services;
 
-import com.example.footballmadrid.Models.PitchModel;
-import com.example.footballmadrid.Repositories.PitchRepository;
+import com.example.footballmadrid.models.PitchModel;
+import com.example.footballmadrid.repositories.PitchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,8 @@
 package com.example.footballmadrid;
 
-import com.example.footballmadrid.Models.UserModel;
-import com.example.footballmadrid.Repositories.UserRepository;
+import com.example.footballmadrid.models.UserModel;
+import com.example.footballmadrid.repositories.UserRepository;
+import com.example.footballmadrid.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 public class InitDB {
 @Autowired
 UserRepository userRepository;
+@Autowired
+UserService userService;
 
 @PostConstruct
 public void initDB() {
@@ -21,6 +24,9 @@ public void initDB() {
         userRepository.save(new UserModel("juan", "juanpass"));
         userRepository.save(new UserModel("luis", "luispass"));
         userRepository.save(new UserModel("pepe", "pepepass"));
+
+
+
     }
 }
 

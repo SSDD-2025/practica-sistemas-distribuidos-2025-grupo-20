@@ -1,8 +1,8 @@
 package com.example.footballmadrid;
 
-import com.example.footballmadrid.Models.*;
-import com.example.footballmadrid.Repositories.*;
-import com.example.footballmadrid.Services.*;
+import com.example.footballmadrid.models.*;
+import com.example.footballmadrid.repositories.*;
+import com.example.footballmadrid.services.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

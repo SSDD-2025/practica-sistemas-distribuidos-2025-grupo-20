@@ -1,4 +1,4 @@
-package com.example.footballmadrid.Models;
+package com.example.footballmadrid.models;
 
 import jakarta.persistence.*;
 
@@ -15,8 +15,27 @@ public class UserModel {
     private String username;
     private String password;
 
+    public String getUsername() {
+        return username;
+    }
 
-//relational variables
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<GameModel> getGameModel() {
+        return gameModel;
+    }
+
+    //relational variables
     //list of comments
     @OneToMany(mappedBy ="userModel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentModel> commentModel;

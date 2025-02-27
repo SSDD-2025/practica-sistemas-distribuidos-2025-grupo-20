@@ -1,4 +1,4 @@
-package com.example.footballmadrid.Models;
+package com.example.footballmadrid.models;
 
 import jakarta.persistence.*;
 
