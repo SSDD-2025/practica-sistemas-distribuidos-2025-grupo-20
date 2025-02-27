@@ -14,7 +14,7 @@ public class ChatModel {
     @JoinColumn(name = "gameModel_id")
     private GameModel gameModel;
 
-    @OneToMany(mappedBy = "chatModel")
+    @ManyToMany(mappedBy = "chatModel")
     private List<UserModel> userModel;
 
 
