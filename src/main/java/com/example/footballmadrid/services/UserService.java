@@ -25,14 +25,20 @@ public class UserService {
     public UserModel save(UserModel userModel){
         return userRepository.save(userModel);
     }
+
     public int delete(Long id) {
+        /*
+        * if deletion goes wrong return 1
+        * else 0
+        * */
+
         try {
             userRepository.deleteById(id);
             return 0;
         }
         catch (Exception e) {
             System.err.println("failed deletion"+e.getMessage());
-            return 0;
+            return 1;
         }
 
     }

@@ -1,9 +1,12 @@
 package com.example.footballmadrid.services;
 
 import com.example.footballmadrid.models.GameModel;
+import com.example.footballmadrid.models.UserModel;
 import com.example.footballmadrid.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GameService {
@@ -18,4 +21,14 @@ public class GameService {
     public GameModel save(GameModel gameModel) {
         return gameRepository.save(gameModel);
     }
+
+    public void addPlayer(UserModel userModel,  GameModel gameModel) {
+        gameModel.addUser(userModel);
+        //gameRepository.save(gameModel);
+
+    }
+
+
+
+
 }

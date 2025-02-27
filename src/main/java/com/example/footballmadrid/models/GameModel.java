@@ -3,6 +3,7 @@ package com.example.footballmadrid.models;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "gameModel")
@@ -10,6 +11,7 @@ public class GameModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String startTime;
 
     @ManyToOne
     @JoinColumn(name = "pitchModel_id")
@@ -21,23 +23,36 @@ public class GameModel {
             joinColumns = {@JoinColumn(name = "game_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-    private List<UserModel> userModel;
+    private Set<UserModel> userModel;
 
+    public GameModel() {
 
-    public ChatModel getChatModel() {
-        return chatModel;
+    }
+    public GameModel(String startTime, PitchModel pitchModel) {
+        this.pitchModel = pitchModel;
+        this.startTime = startTime;
     }
 
-    public void setChatModel(ChatModel chatModel) {
-        this.chatModel = chatModel;
+    public void addUser(UserModel userModel) {
+            this.userModel.add(userModel);
     }
 
-    public List<UserModel> getUserModel() {
-        return userModel;
+    //getters and setters
+
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setUserModel(List<UserModel> userModel) {
-        this.userModel = userModel;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public PitchModel getPitchModel() {
@@ -48,18 +63,11 @@ public class GameModel {
         this.pitchModel = pitchModel;
     }
 
-    @OneToOne(mappedBy = "gameModel")
-    private ChatModel chatModel;
-
-    public GameModel() {
-
+    public Set<UserModel> getUserModel() {
+        return userModel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    public void setUserModel(Set<UserModel> userModel) {
+        this.userModel = userModel;
     }
 }
