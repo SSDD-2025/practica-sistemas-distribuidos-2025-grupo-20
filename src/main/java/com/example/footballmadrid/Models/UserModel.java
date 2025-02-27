@@ -29,6 +29,30 @@ public class UserModel {
     @JoinColumn(name = "chatModel_id")
     private ChatModel chatModel;
 
+    public List<GameModel> getGameModel() {
+        return gameModel;
+    }
+
+    public void setGameModel(List<GameModel> gameModel) {
+        this.gameModel = gameModel;
+    }
+
+    public ChatModel getChatModel() {
+        return chatModel;
+    }
+
+    public void setChatModel(ChatModel chatModel) {
+        this.chatModel = chatModel;
+    }
+
+    public List<MessageModel> getMessageModel() {
+        return messageModel;
+    }
+
+    public void setMessageModel(List<MessageModel> messageModel) {
+        this.messageModel = messageModel;
+    }
+
     @OneToMany(mappedBy = "userModel")
     private List<MessageModel> messageModel;
 

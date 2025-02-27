@@ -12,6 +12,22 @@ public class MessageModel {
     @JoinColumn(name = "userModel_id")
     private UserModel userModel;
 
+    public ChatModel getChatModel() {
+        return chatModel;
+    }
+
+    public void setChatModel(ChatModel chatModel) {
+        this.chatModel = chatModel;
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
     @ManyToOne
     @JoinColumn(name = "chatModel_id")
     private ChatModel chatModel;

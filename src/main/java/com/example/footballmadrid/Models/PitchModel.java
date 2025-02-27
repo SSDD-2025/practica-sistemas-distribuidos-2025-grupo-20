@@ -21,6 +21,13 @@ public class PitchModel {
     @OneToMany(mappedBy = "pitchModel")
     private List<GameModel> gameModel;
 
+    public List<GameModel> getGameModel() {
+        return gameModel;
+    }
+
+    public void setGameModel(List<GameModel> gameModel) {
+        this.gameModel = gameModel;
+    }
 
     public PitchModel() {
 

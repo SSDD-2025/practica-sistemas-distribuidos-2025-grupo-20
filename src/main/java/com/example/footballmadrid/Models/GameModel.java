@@ -23,6 +23,30 @@ public class GameModel {
     )
     private List<UserModel> userModel;
 
+    public ChatModel getChatModel() {
+        return chatModel;
+    }
+
+    public void setChatModel(ChatModel chatModel) {
+        this.chatModel = chatModel;
+    }
+
+    public List<UserModel> getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(List<UserModel> userModel) {
+        this.userModel = userModel;
+    }
+
+    public PitchModel getPitchModel() {
+        return pitchModel;
+    }
+
+    public void setPitchModel(PitchModel pitchModel) {
+        this.pitchModel = pitchModel;
+    }
+
     @OneToOne(mappedBy = "gameModel")
     private ChatModel chatModel;
 

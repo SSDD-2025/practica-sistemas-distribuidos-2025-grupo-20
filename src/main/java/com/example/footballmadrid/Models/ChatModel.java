@@ -21,6 +21,29 @@ public class ChatModel {
     @OneToMany(mappedBy = "chatModel")
     private List<MessageModel> messageModel;
 
+    public GameModel getGameModel() {
+        return gameModel;
+    }
+
+    public void setGameModel(GameModel gameModel) {
+        this.gameModel = gameModel;
+    }
+
+    public List<UserModel> getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(List<UserModel> userModel) {
+        this.userModel = userModel;
+    }
+
+    public List<MessageModel> getMessageModel() {
+        return messageModel;
+    }
+
+    public void setMessageModel(List<MessageModel> messageModel) {
+        this.messageModel = messageModel;
+    }
 
     public ChatModel() {
 
