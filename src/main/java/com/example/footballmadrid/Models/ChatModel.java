@@ -21,6 +21,7 @@ public class ChatModel {
     @OneToMany(mappedBy = "chatModel")
     private List<MessageModel> messageModel;
 
+
     public GameModel getGameModel() {
         return gameModel;
     }

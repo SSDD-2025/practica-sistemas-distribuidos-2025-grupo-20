@@ -23,6 +23,7 @@ public class GameModel {
     )
     private List<UserModel> userModel;
 
+
     public ChatModel getChatModel() {
         return chatModel;
     }
