@@ -13,6 +13,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
     //constructors
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,11 +30,22 @@ public class UserService {
 
     public void joinGame(GameModel gameModel, UserModel userModel){
         try {
+            userModel.getGameModel().clear();
             userModel.getGameModel().add(gameModel);
+            //roundabout solution to the duplication problem
+
+
+
+
             userRepository.save(userModel);
         }catch (Exception e){
+            //this code was for a Set instead of the actual implemented List
             System.err.println("duplicated"+e.getMessage());
         }
+
+    }
+    private void fixDuplicates(UserModel userModel){
+
     }
 
     public int delete(Long id) {

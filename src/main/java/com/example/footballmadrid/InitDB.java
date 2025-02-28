@@ -65,15 +65,10 @@ public void initDB() {
         userService.joinGame(gm1,um1);
         userService.joinGame(gm2,um2);
         userService.joinGame(gm1,um2);
-
-
-
-
-/*
         userService.joinGame(gm2,um4);
         userService.joinGame(gm3,um4);
         userService.joinGame(gm2,um1);
-*/
+
 
 
 

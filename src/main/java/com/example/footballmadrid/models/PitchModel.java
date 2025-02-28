@@ -2,6 +2,7 @@ package com.example.footballmadrid.models;
 
 import jakarta.persistence.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class PitchModel {
     private Long id;
 
     @OneToMany(mappedBy = "pitchModel")
-    private List<GameModel> gameModel;
+    private List<GameModel> gameModel = new LinkedList<GameModel>();
 
 
     public PitchModel() {
