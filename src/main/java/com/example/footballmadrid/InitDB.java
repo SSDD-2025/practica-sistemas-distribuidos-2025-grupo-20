@@ -51,17 +51,29 @@ public void initDB() {
 
         PitchModel pitchModel = new PitchModel("getafe_fc","getafe","10:00 - 00:00");
         pitchRepository.save(pitchModel);
-        GameModel gm1 =new GameModel("10:00", pitchModel);
-        gm1 =gameRepository.save(gm1);
-        GameModel gm2 =new GameModel("12:00", pitchModel);
+        GameModel gm1 =new GameModel("game1","10:00", pitchModel);
+        gameRepository.save(gm1);
+        GameModel gm2 =new GameModel("game2","12:00", pitchModel);
         gameRepository.save(gm2);
-        GameModel gm3 =new GameModel("14:00", pitchModel);
+        GameModel gm3 =new GameModel("game3","14:00", pitchModel);
         gameRepository.save(gm3);
-        GameModel gm4 =new GameModel("16:00", pitchModel);
+        GameModel gm4 =new GameModel("game4","16:00", pitchModel);
         gameRepository.save(gm4);
 
-        gameService.addPlayer(um1,gm1);
 
+
+        userService.joinGame(gm1,um1);
+        userService.joinGame(gm2,um2);
+        userService.joinGame(gm1,um2);
+
+
+
+
+/*
+        userService.joinGame(gm2,um4);
+        userService.joinGame(gm3,um4);
+        userService.joinGame(gm2,um1);
+*/
 
 
 

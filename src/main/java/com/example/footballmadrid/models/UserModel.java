@@ -2,7 +2,10 @@ package com.example.footballmadrid.models;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "userModel")
@@ -19,8 +22,13 @@ public class UserModel {
 
     //relational variables
     //List of Games
-    @ManyToMany(mappedBy = "userModel")
-    private List<GameModel>  gameModel;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "game_user",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "game_id")}
+    )
+    private List<GameModel> gameModel = new LinkedList<>();
 
 
 
@@ -50,6 +58,7 @@ public class UserModel {
     public String getUsername() {
         return username;
     }
+
 
     public void setUsername(String username) {
         this.username = username;

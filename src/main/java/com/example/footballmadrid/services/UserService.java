@@ -1,5 +1,6 @@
 package com.example.footballmadrid.services;
 
+import com.example.footballmadrid.models.GameModel;
 import com.example.footballmadrid.models.UserModel;
 import com.example.footballmadrid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class UserService {
     //methods
     public UserModel save(UserModel userModel){
         return userRepository.save(userModel);
+    }
+
+    public void joinGame(GameModel gameModel, UserModel userModel){
+        try {
+            userModel.getGameModel().add(gameModel);
+            userRepository.save(userModel);
+        }catch (Exception e){
+            System.err.println("duplicated"+e.getMessage());
+        }
     }
 
     public int delete(Long id) {

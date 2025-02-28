@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GameRepository extends JpaRepository<GameModel, Long> {
+public interface GameRepository extends JpaRepository<GameModel, String> {
 
 
     //public GameModel addUser(UserModel userModel);

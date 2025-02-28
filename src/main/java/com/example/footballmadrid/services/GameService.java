@@ -22,11 +22,9 @@ public class GameService {
         return gameRepository.save(gameModel);
     }
 
-    public void addPlayer(UserModel userModel,  GameModel gameModel) {
-        gameModel.addUser(userModel);
-        //gameRepository.save(gameModel);
 
-    }
+
+
 
 
 

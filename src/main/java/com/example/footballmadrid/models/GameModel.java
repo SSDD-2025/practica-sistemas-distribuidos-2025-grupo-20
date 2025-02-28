@@ -2,6 +2,8 @@ package com.example.footballmadrid.models;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,32 +11,27 @@ import java.util.Set;
 @Table(name = "gameModel")
 public class GameModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     private String startTime;
 
     @ManyToOne
     @JoinColumn(name = "pitchModel_id")
     private PitchModel pitchModel;
 
-    @ManyToMany
-    @JoinTable(
-            name = "game_user",
-            joinColumns = {@JoinColumn(name = "game_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    private Set<UserModel> userModel;
+    @ManyToMany(mappedBy = "gameModel",cascade = CascadeType.ALL)
+    private List<UserModel> userModel = new LinkedList<>();
 
     public GameModel() {
 
     }
-    public GameModel(String startTime, PitchModel pitchModel) {
+    public GameModel(String id,String startTime, PitchModel pitchModel) {
         this.pitchModel = pitchModel;
         this.startTime = startTime;
+        this.id = id;
     }
 
-    public void addUser(UserModel userModel) {
-            this.userModel.add(userModel);
+    public void setId(String id) {
+        this.id = id;
     }
 
     //getters and setters
@@ -47,12 +44,8 @@ public class GameModel {
         this.startTime = startTime;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public PitchModel getPitchModel() {
@@ -63,11 +56,11 @@ public class GameModel {
         this.pitchModel = pitchModel;
     }
 
-    public Set<UserModel> getUserModel() {
+    public List<UserModel> getUserModel() {
         return userModel;
     }
 
-    public void setUserModel(Set<UserModel> userModel) {
+    public void setUserModel(List<UserModel> userModel) {
         this.userModel = userModel;
     }
 }
