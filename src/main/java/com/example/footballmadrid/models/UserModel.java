@@ -2,16 +2,13 @@ package com.example.footballmadrid.models;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "userModel")
 public class UserModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 //non relational variables
 
@@ -22,7 +19,7 @@ public class UserModel {
 
     //relational variables
     //List of Games
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "game_user",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -41,6 +38,12 @@ public class UserModel {
         this.username = username;
         this.password = password;
     }
+    public UserModel(Long id,String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.id = id;
+    }
+
 
 
 

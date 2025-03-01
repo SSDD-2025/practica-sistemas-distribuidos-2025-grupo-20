@@ -17,7 +17,7 @@ public class PitchModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "pitchModel")
+    @OneToMany(mappedBy = "pitchModel",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<GameModel> gameModel = new LinkedList<GameModel>();
 
 

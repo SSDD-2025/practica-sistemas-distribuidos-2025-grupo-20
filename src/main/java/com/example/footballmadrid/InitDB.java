@@ -35,16 +35,16 @@ public void initDB() {
     pitchRepository.deleteAll();
 
     if (!isTestingEnviroment()) {
-        UserModel um1 =new UserModel("jose", "josepass");
+        UserModel um1 =new UserModel(1L,"jose", "josepass");
         userRepository.save(um1);
 
-        UserModel um2 =new UserModel("juan", "juanpass");
+        UserModel um2 =new UserModel(2L,"juan", "juanpass");
         userRepository.save(um2);
 
-        UserModel um3 =new UserModel("luis", "luispass");
+        UserModel um3 =new UserModel(3L,"luis", "luispass");
         userRepository.save(um3);
 
-        UserModel um4 =new UserModel("pepe", "pepepass");
+        UserModel um4 =new UserModel(4L,"pepe", "pepepass");
         userRepository.save(um4);
 
 
@@ -69,7 +69,7 @@ public void initDB() {
         userService.joinGame(gm3,um4);
         userService.joinGame(gm2,um1);
 
-
+        userService.leaveGame(gm1,um1);
 
 
 

@@ -30,7 +30,7 @@ public class UserService {
 
     public void joinGame(GameModel gameModel, UserModel userModel){
         try {
-            userModel.getGameModel().clear();
+            userRepository.delete(userModel);
             userModel.getGameModel().add(gameModel);
             //roundabout solution to the duplication problem
 
@@ -41,13 +41,23 @@ public class UserService {
         }catch (Exception e){
             //this code was for a Set instead of the actual implemented List
             System.err.println("duplicated"+e.getMessage());
+            userModel.getGameModel().add(gameModel);
+            userRepository.save(userModel);
         }
 
     }
-    private void fixDuplicates(UserModel userModel){
 
+
+    public void  leaveGame(GameModel gameModel, UserModel userModel){
+        try {
+            userRepository.delete(userModel);
+            userModel.getGameModel().remove(gameModel);
+            userRepository.save(userModel);
+
+        }catch (Exception e){
+            System.err.println("failed to leave game"+e.getMessage());
+        }
     }
-
     public int delete(Long id) {
         /*
         * if deletion goes wrong return 1

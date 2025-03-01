@@ -14,11 +14,11 @@ public class GameModel {
     private String id;
     private String startTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pitchModel_id")
     private PitchModel pitchModel;
 
-    @ManyToMany(mappedBy = "gameModel",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "gameModel", fetch = FetchType.EAGER)
     private List<UserModel> userModel = new LinkedList<>();
 
     public GameModel() {
