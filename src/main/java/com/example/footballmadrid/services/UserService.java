@@ -41,6 +41,10 @@ public class UserService {
         }catch (Exception e){
             //this code was for a Set instead of the actual implemented List
             System.err.println("duplicated"+e.getMessage());
+
+
+
+
             userModel.getGameModel().add(gameModel);
             userRepository.save(userModel);
         }

@@ -4,20 +4,28 @@ import com.example.footballmadrid.models.UserModel;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping
-    public List<UserModel> findAll() {
-        return userService.findAll();
-    }
 
+
+
+    @GetMapping("/users")
+    public ModelAndView findUsers(Map<String, Object> model) {
+
+        List users = userService.findAll();
+        model.put("users", users);
+        model.put("title", "<Users>");
+        return new ModelAndView("index", model);
+    }
+    @RequestMapping("/user")
     @GetMapping("/{id}")
     public UserModel findById(@PathVariable long id) {
         return userService.findById(id);
@@ -30,5 +38,5 @@ public class UserController {
         return userService.findById(id);
     }
 
-    //ignorar esto me olvide totalmente que no es de esta practica pero se queda para la siguiente :)
+
 }
