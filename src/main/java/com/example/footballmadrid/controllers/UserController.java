@@ -69,7 +69,26 @@ public class UserController {
 
         return new ModelAndView("gameFinder", model);
     }
+    @GetMapping(value = "/signUp")
+    public ModelAndView getSignUp(Map<String, Object> model) {
 
+        return new ModelAndView("signUp",model);
+    }
+
+
+
+    @PostMapping(value = "/signUp", params = {"username", "password"})
+    public ModelAndView signUp(@RequestParam String username, @RequestParam String password, Map<String,Object> model) {
+        if (userService.createUser(username, password)!=null) {
+            model.put("message","signUp successful");
+            return new ModelAndView("login",model);
+        } else {
+            model.put("message","signUp failed, username already in use");
+            return new ModelAndView("signUp", model);
+
+        }
+
+    }
 
 
     /*

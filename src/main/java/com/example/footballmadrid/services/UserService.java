@@ -4,6 +4,7 @@ import com.example.footballmadrid.models.GameModel;
 import com.example.footballmadrid.models.UserModel;
 import com.example.footballmadrid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    private ApplicationArguments applicationArguments;
 
     //constructors
     public UserService(UserRepository userRepository) {
@@ -27,6 +30,20 @@ public class UserService {
     public UserModel save(UserModel userModel){
         return userRepository.save(userModel);
     }
+
+    public UserModel createUser(String username, String password){
+
+
+        if(userRepository.findByUsername(username)==null){
+            return userRepository.save(new UserModel(userRepository.count()+1,username,password));
+        }
+
+
+
+
+            return null;
+    }
+
 
     public boolean login(String username, String password) {
         try{
