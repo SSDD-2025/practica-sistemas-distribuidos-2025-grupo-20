@@ -10,14 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
 
 
-
-
-    @GetMapping("/users")
+    @GetMapping
     public ModelAndView findUsers(Map<String, Object> model) {
 
         List users = userService.findAll();
@@ -25,7 +24,8 @@ public class UserController {
         model.put("title", "<Users>");
         return new ModelAndView("index", model);
     }
-    @RequestMapping("/user")
+        /*
+
     @GetMapping("/{id}")
     public UserModel findById(@PathVariable long id) {
         return userService.findById(id);
@@ -36,7 +36,9 @@ public class UserController {
     //  example of use
         userService.editUserName(id, username);
         return userService.findById(id);
+
     }
+     */
 
 
 }

@@ -21,6 +21,9 @@ public class GameService {
     public GameModel save(GameModel gameModel) {
         return gameRepository.save(gameModel);
     }
+    public List<GameModel> findAll() {
+        return gameRepository.findAll();
+    }
 
 
 
