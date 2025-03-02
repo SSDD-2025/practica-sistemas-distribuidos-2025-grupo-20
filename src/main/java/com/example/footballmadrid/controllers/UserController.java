@@ -3,8 +3,6 @@ package com.example.footballmadrid.controllers;
 import com.example.footballmadrid.models.UserModel;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,9 +29,9 @@ public class UserController {
     public ModelAndView menu(@RequestParam String username,@RequestParam String password,Map<String,Object> model){
 
         if(userService.login(username,password)){
-            UserModel um = userService.findByUsername(username);
+
             model.put("title","login");
-            model.put("username",um.getUsername());
+            model.put("userModel",userService.findByUsername(username));
 
             return new  ModelAndView("menu",model);
         }
@@ -49,6 +47,27 @@ public class UserController {
         model.put("users", users);
         model.put("title", "<Users>");
         return new ModelAndView("index", model);
+    }
+
+    @GetMapping("accountSettings")
+    public ModelAndView accountSettings(Map<String, Object> model) {
+
+        model.put("title", "accountSettings");
+
+        return new ModelAndView("accountSettings", model);
+    }
+    @GetMapping("user/games")
+    public ModelAndView games(Map<String, Object> model) {
+
+        model.put("title", "games");
+
+
+        UserModel userModel = (UserModel) model.get("userModel");
+
+        model.put("gameModels",userModel.getGameModel());
+
+
+        return new ModelAndView("gameFinder", model);
     }
 
 
