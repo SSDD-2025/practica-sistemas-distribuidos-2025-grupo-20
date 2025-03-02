@@ -28,6 +28,26 @@ public class UserService {
         return userRepository.save(userModel);
     }
 
+    public boolean login(String username, String password) {
+        try{
+            if(password.compareTo(userRepository.findByUsername(username).getPassword())==0){
+                return true;
+            }
+
+        }
+        catch(Exception e){
+            System.err.println("User not found");
+            return false;
+
+        }
+
+        return false;
+    }
+
+
+
+
+
     public void joinGame(GameModel gameModel, UserModel userModel){
         try {
             userRepository.delete(userModel);
@@ -83,6 +103,9 @@ public class UserService {
     }
     public UserModel findById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+    public UserModel findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public int editUserName(Long id,String name){

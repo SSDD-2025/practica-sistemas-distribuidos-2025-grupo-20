@@ -3,6 +3,8 @@ package com.example.footballmadrid.controllers;
 import com.example.footballmadrid.models.UserModel;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,10 +12,34 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
     @Autowired
     UserService userService;
+
+
+    @GetMapping("/login")
+    public ModelAndView login(Map<String,Object> model){
+
+
+        model.put("title","login");
+
+        return new ModelAndView("login",model);
+    }
+
+    @PostMapping(value= "/login",params = {"username", "password"})
+    public ModelAndView menu(@RequestParam String username,@RequestParam String password,Map<String,Object> model){
+
+        if(userService.login(username,password)){
+            UserModel um = userService.findByUsername(username);
+            model.put("title","login");
+            model.put("username",um.getUsername());
+
+            return new  ModelAndView("menu",model);
+        }
+        model.put("message","login failed try again");
+        return new ModelAndView("login",model);
+    }
 
 
     @GetMapping
@@ -24,7 +50,10 @@ public class UserController {
         model.put("title", "<Users>");
         return new ModelAndView("index", model);
     }
-        /*
+
+
+
+    /*
 
     @GetMapping("/{id}")
     public UserModel findById(@PathVariable long id) {
