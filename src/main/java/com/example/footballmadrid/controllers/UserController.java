@@ -24,7 +24,6 @@ public class UserController {
 
         return new ModelAndView("login",model);
     }
-
     @PostMapping(value= "/login",params = {"username", "password"})
     public ModelAndView menu(@RequestParam String username,@RequestParam String password,Map<String,Object> model){
 
@@ -38,8 +37,6 @@ public class UserController {
         model.put("message","login failed try again");
         return new ModelAndView("login",model);
     }
-
-
     @GetMapping
     public ModelAndView findUsers(Map<String, Object> model) {
 
@@ -48,10 +45,19 @@ public class UserController {
         model.put("title", "<Users>");
         return new ModelAndView("index", model);
     }
+    @GetMapping("user/accountSettings")
+    public ModelAndView accountSettings(@RequestParam Long id, Map<String, Object> model) {
 
-    @GetMapping("accountSettings")
-    public ModelAndView accountSettings(Map<String, Object> model) {
+        model.put("userModel",userService.findById(id) );
+        model.put("title", "accountSettings");
 
+        return new ModelAndView("accountSettings", model);
+    }
+    @PostMapping(value = "user/accountSettings", params = {"id"})
+    public ModelAndView PostAccountSettings(@RequestParam Long id, Map<String, Object> model) {
+
+
+        model.put("id", id);
         model.put("title", "accountSettings");
 
         return new ModelAndView("accountSettings", model);
@@ -74,9 +80,6 @@ public class UserController {
 
         return new ModelAndView("signUp",model);
     }
-
-
-
     @PostMapping(value = "/signUp", params = {"username", "password"})
     public ModelAndView signUp(@RequestParam String username, @RequestParam String password, Map<String,Object> model) {
         if (userService.createUser(username, password)!=null) {
@@ -90,22 +93,28 @@ public class UserController {
 
     }
 
+    @PostMapping(value = "/user/changeUsernameMenu", params = {"id"})
+    public ModelAndView PostChangeUsernameMenu(@RequestParam Long id, Map<String, Object> model) {
+        model.put("id",id);
+        model.put("title", "changeUsername");
 
-    /*
-
-    @GetMapping("/{id}")
-    public UserModel findById(@PathVariable long id) {
-        return userService.findById(id);
+        return new ModelAndView("changeUsername", model);
     }
-    @PutMapping("/{id}")
-    public UserModel updateUser(@PathVariable long id, @RequestBody String username) {
-    //    "http://localhost:8080/user/1?username=changed"
-    //  example of use
-        userService.editUserName(id, username);
-        return userService.findById(id);
+    @PostMapping(value = "/user/changeUsername", params = {"id","username"})
+    public ModelAndView PostChangeUsername(@RequestParam Long id, @RequestParam String username, Map<String, Object> model) {
+        System.err.println("1");
+        UserModel userModel = userService.findById(id);
+        System.err.println("2");
+        userModel.setUsername(username);
+        System.err.println("3");
+        userService.save(userModel);
+        System.err.println("4");
 
+        model.put("title", "changeUsername");
+        model.put("userModel",userModel);
+        System.err.println("5");
+        return new ModelAndView("menu", model);
     }
-     */
 
 
 }

@@ -13,21 +13,26 @@
         {{/userModel}}
     </p>
     <div>
-        <a href="accountSettings">Account Settings</a>
+        <form method="post" action="user/accountSettings">
+            <input type="hidden"  name="id" value={{userModel.id}}>
+            <input type="submit" value="Account Settings">
+        </form>
     </div>
 
     <div>
-        <a href="user/games">Find Games</a>
+        <form method="POST" action="user/games">
+            <input type="hidden" name="id" value={{userModel}}>
+            <button type="submit" value="Game Finder">Game Finder</button>
+        </form>
     </div>
 
     <div>
-        <a href="login">Logout</a>
+        <form method="GET" action="login">
+            <button type="submit" value="Logout">Logout</button>
+        </form>
     </div>
 
-    <div>
 
-
-    </div>
 
 </div>
 </body>

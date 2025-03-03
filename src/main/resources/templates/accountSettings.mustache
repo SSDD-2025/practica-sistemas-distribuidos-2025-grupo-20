@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-<p>work in progress</p>
+
+
+<form action="/user/changeUsernameMenu" method="post">
+    <label>
+        <input type="hidden" name="id" value= "{{id}}">
+    </label>
+    <button type="submit"> Change Username</button>
+</form>
+<form action="/changePassword" method="post">
+    <label>
+        <input hidden value="{{id}}">
+    </label>
+    <button type="submit"> Change Password</button>
+</form>
+<form action="/user/accountSettings" method="post">
+    <label>
+        <input hidden value="{{id}}">
+    </label>
+    <button type="submit"> Return</button>
+</form>
+
+
+
 </body>
 </html>
