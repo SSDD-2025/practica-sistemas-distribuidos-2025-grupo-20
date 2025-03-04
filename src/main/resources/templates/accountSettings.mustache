@@ -2,34 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .settings-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 15px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 35px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
+<div class="settings-container">
+    <h2>User Settings</h2>
 
-<form action="/user/changeUsernameMenu" method="post">
-    <label>
-        <input type="hidden" name="id" value= "{{id}}">
-    </label>
-    <button type="submit"> Change Username</button>
-</form>
-
-
-<form action="/user/changePassword" method="get">
-    <label>
+    <form action="/user/changeUsernameMenu" method="post">
         <input type="hidden" name="id" value="{{id}}">
-    </label>
-    <button type="submit"> Change Password</button>
+        <button type="submit">Change Username</button>
+    </form>
 
-</form>
+    <form action="/user/changePassword" method="get">
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit">Change Password</button>
+    </form>
 
-
-<a href ="/login">
-    <button type="submit"> Return</button>
-</a>
-
-
-
+    <a href="/login">
+        <button>Return</button>
+    </a>
+</div>
 
 </body>
 </html>
