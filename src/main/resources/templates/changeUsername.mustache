@@ -5,7 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-{{id}}
+{{#message}}
+    {{message}}
+{{/message}}
 <p>choose your new username</p>
 <form method="POST" action="/user/changeUsername">
     <input type="hidden" name="id" value= "{{id}}">

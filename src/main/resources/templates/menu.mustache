@@ -11,10 +11,13 @@
         {{#userModel}}
             Welcome {{userModel.username}}
         {{/userModel}}
+        {{#message}}
+           {{message}}
+        {{/message}}
     </p>
     <div>
-        <form method="post" action="user/accountSettings">
-            <input type="hidden"  name="id" value={{userModel.id}}>
+        <form method="post" action="/user/accountSettings">
+            <input type="hidden"  name="id" value={{id}}>
             <input type="submit" value="Account Settings">
         </form>
     </div>
@@ -27,9 +30,12 @@
     </div>
 
     <div>
-        <form method="GET" action="login">
-            <button type="submit" value="Logout">Logout</button>
-        </form>
+        <a href="/login">
+
+            <button>Logout</button>
+
+        </a>
+
     </div>
 
 

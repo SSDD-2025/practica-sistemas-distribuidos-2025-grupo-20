@@ -1,6 +1,7 @@
 package com.example.footballmadrid.controllers;
 
 import com.example.footballmadrid.models.UserModel;
+import com.example.footballmadrid.repositories.UserRepository;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/login")
@@ -30,6 +33,7 @@ public class UserController {
         if(userService.login(username,password)){
 
             model.put("title","login");
+            model.put("id",userService.findByUsername(username).getId());
             model.put("userModel",userService.findByUsername(username));
 
             return new  ModelAndView("menu",model);
@@ -48,6 +52,7 @@ public class UserController {
     @GetMapping("user/accountSettings")
     public ModelAndView accountSettings(@RequestParam Long id, Map<String, Object> model) {
 
+        model.put("id",id);
         model.put("userModel",userService.findById(id) );
         model.put("title", "accountSettings");
 
@@ -55,9 +60,8 @@ public class UserController {
     }
     @PostMapping(value = "user/accountSettings", params = {"id"})
     public ModelAndView PostAccountSettings(@RequestParam Long id, Map<String, Object> model) {
-
-
         model.put("id", id);
+        model.put("userModel",userService.findById(id) );
         model.put("title", "accountSettings");
 
         return new ModelAndView("accountSettings", model);
@@ -84,6 +88,8 @@ public class UserController {
     public ModelAndView signUp(@RequestParam String username, @RequestParam String password, Map<String,Object> model) {
         if (userService.createUser(username, password)!=null) {
             model.put("message","signUp successful");
+
+
             return new ModelAndView("login",model);
         } else {
             model.put("message","signUp failed, username already in use");
@@ -96,25 +102,53 @@ public class UserController {
     @PostMapping(value = "/user/changeUsernameMenu", params = {"id"})
     public ModelAndView PostChangeUsernameMenu(@RequestParam Long id, Map<String, Object> model) {
         model.put("id",id);
+        model.put("userModel",userService.findById(id));
         model.put("title", "changeUsername");
 
         return new ModelAndView("changeUsername", model);
     }
     @PostMapping(value = "/user/changeUsername", params = {"id","username"})
     public ModelAndView PostChangeUsername(@RequestParam Long id, @RequestParam String username, Map<String, Object> model) {
-        System.err.println("1");
-        UserModel userModel = userService.findById(id);
-        System.err.println("2");
-        userModel.setUsername(username);
-        System.err.println("3");
-        userService.save(userModel);
-        System.err.println("4");
 
+
+        if(userRepository.findByUsername(username)!=null) {
+            model.put("id",id);
+            model.put("userModel",userService.findById(id));
+            model.put("message","username already in use");
+            return new ModelAndView("changeUsername",model);
+        }
+        UserModel userModel = userService.findById(id);
+        userModel.setUsername(username);
+        userService.save(userModel);
+        model.put("id",id);
         model.put("title", "changeUsername");
+        model.put("message","username successfully changed");
         model.put("userModel",userModel);
-        System.err.println("5");
         return new ModelAndView("menu", model);
     }
 
+    @GetMapping(value="/user/changePassword")
+    public ModelAndView changePassword(@RequestParam Long id, Map<String, Object> model) {
+        model.put("id",id);
+        model.put("userModel",userService.findById(id));
+        return new ModelAndView("changePassword",model);
+    }
+
+    @PostMapping(value="/user/changePassword", params = {"id", "newPassword"})
+    public ModelAndView PostChangePassword(@RequestParam Long id, @RequestParam String newPassword, Map<String,Object> model) {
+        UserModel userModel = userService.findById(id);
+        userModel.setPassword(newPassword);
+
+        model.put("userModel",userService.save(userModel));
+        model.put("id", id);
+
+        return new ModelAndView("menu",model);
+
+    }
+    @GetMapping("/error")
+    public ModelAndView error(Map<String, Object> model) {
+
+        return new ModelAndView("error",model);
+    }
 
 }

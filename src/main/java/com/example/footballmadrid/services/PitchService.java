@@ -5,6 +5,8 @@ import com.example.footballmadrid.repositories.PitchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PitchService {
     @Autowired
@@ -14,6 +16,11 @@ public class PitchService {
     public PitchService(PitchRepository pitchRepository){
         this.pitchRepository = pitchRepository;
     }
+    public List<PitchModel> getPitches(){
+
+        return pitchRepository.findAll();
+    }
+
 
     public PitchModel save(PitchModel pitchModel){
         return pitchRepository.save(pitchModel);
