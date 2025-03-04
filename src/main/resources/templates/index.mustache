@@ -1,17 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .users-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            margin-bottom: 15px;
+        }
+        .user-item {
+            background: #e0e0e0;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .user-detail {
+            background: #f8f9fa;
+            color: #333;
+            padding: 5px;
+            margin: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-<h1>list of users</h1>
-<div style="background: gray; color: black">
-{{#users}}
-    <div style="background: aquamarine; margin: 5px">{{id}}</div>
-    <div style="background: aliceblue; color: brown; margin: 5px; margin-left: 30px">{{username}}</div>
-    <div style="background: aliceblue; color: brown; margin: 5px; margin-left: 30px">{{password}}</div>
-    <div style="background: aliceblue; color: brown; margin: 5px; margin-left: 30px">{{gameModel}}</div>
 
-
-{{/users}}
+<div class="users-container">
+    <h1>List of Users</h1>
+    {{#users}}
+        <div class="user-item">
+            <div><strong>ID:</strong> <span class="user-detail">{{id}}</span></div>
+            <div><strong>Username:</strong> <span class="user-detail">{{username}}</span></div>
+            <div><strong>Password:</strong> <span class="user-detail">{{password}}</span></div>
+            <div><strong>Game Model:</strong> <span class="user-detail">{{gameModel}}</span></div>
+        </div>
+    {{/users}}
 </div>
+
 </body>
+</html>
+
