@@ -24,9 +24,7 @@ public class GameService {
     public List<GameModel> findAll() {
         return gameRepository.findAll();
     }
-    public List<GameModel> findAllByUserId(Integer userId) {
-        return gameRepository.findAllByUserId(userId);
-    }
+
 
 
 
