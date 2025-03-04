@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface GameRepository extends JpaRepository<GameModel, String> {
 
-    public List<GameModel> findAllByUserId(Integer userId);
     //public GameModel addUser(UserModel userModel);
 
 }
