@@ -48,11 +48,22 @@ public class UserController {
     }
     @GetMapping("user/games/details")
     public ModelAndView details(@RequestParam Long userId,@RequestParam String gameId,Map<String,Object> model){
-            UserModel userModel = userService.findById(userId);
-            model.put("userModel",userModel);
-            GameModel gameModel = gameService.findById(gameId);
-            model.put("gameModel",gameModel);
-            model.put("pitchModel",gameModel.getPitchModel());
+
+
+        GameModel gameModel = gameService.findById(gameId);
+        UserModel userModel = userService.findById(userId);
+        if(gameService.checkJoined(gameModel,userModel)){
+            model.put("status","joined");
+        }
+        else{
+            model.put("status","join");
+        }
+
+
+        model.put("userModel",userModel);
+        model.put("gameModel",gameModel);
+        model.put("pitchModel",gameModel.getPitchModel());
+
 
 
         return  new ModelAndView("gameDetails",model);
@@ -61,6 +72,9 @@ public class UserController {
     public ModelAndView joinGame(@RequestParam Long userId,@RequestParam String gameId,@RequestParam Map<String,Object> model){
         GameModel gameModel = gameService.findById(gameId);
         UserModel userModel = userService.findById(userId);
+        gameService.checkJoined(gameModel,userModel);
+
+
 
         if(!gameModel.getUserModel().contains(userModel)) {
             userService.joinGame(gameService.findById(gameId), userService.findById(userId));
@@ -68,11 +82,20 @@ public class UserController {
         else{
             userService.leaveGame(gameModel,userModel);
         }
+
+        if(gameService.checkJoined(gameModel,userModel)){
+            model.put("status","joined");
+        }
+        else{
+            model.put("status","join");
+        }
         model.put("userModel",userModel);
         model.put("gameModel",gameModel);
         model.put("pitchModel",gameModel.getPitchModel());
 
-        return   new ModelAndView("gameDetails",model);
+
+
+        return   new ModelAndView("redirect:/user/games/details",model  );
     }
 
 

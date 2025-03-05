@@ -14,6 +14,8 @@ public class GameModel {
     private String id;
     private String startTime;
 
+    private Boolean joined = false;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pitchModel_id")
     private PitchModel pitchModel;
@@ -24,6 +26,7 @@ public class GameModel {
     public GameModel() {
 
     }
+
     public GameModel(String id,String startTime, PitchModel pitchModel) {
         this.pitchModel = pitchModel;
         this.startTime = startTime;
@@ -31,11 +34,18 @@ public class GameModel {
     }
 
 
-
     public void setId(String id) {
         this.id = id;
     }
 
+
+    public Boolean getJoined() {
+        return joined;
+    }
+
+    public void setJoined(Boolean joined) {
+        this.joined = joined;
+    }
     //getters and setters
 
     public String getStartTime() {

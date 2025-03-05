@@ -29,6 +29,11 @@ public class GameService {
         return gameRepository.findById(id).orElse(null);
     }
 
+    public Boolean checkJoined(GameModel gameModel,UserModel userModel) {
+        List<UserModel> userModels = gameModel.getUserModel();
+        return userModels.contains(userModel);
+    }
+
     public List<GameModel> findAll() {
         return gameRepository.findAll();
     }

@@ -100,6 +100,12 @@ public class UserService {
             System.err.println("failed to leave game"+e.getMessage());
         }
     }
+    public void checkJoined(){
+
+
+
+    }
+
     public int delete(Long id) {
         /*
         * if deletion goes wrong return 1
