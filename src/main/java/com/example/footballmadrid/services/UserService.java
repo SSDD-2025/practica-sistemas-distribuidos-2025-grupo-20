@@ -68,12 +68,11 @@ public class UserService {
 
 
     public void joinGame(GameModel gameModel, UserModel userModel){
+
         try {
             userRepository.delete(userModel);
             userModel.getGameModel().add(gameModel);
             //roundabout solution to the duplication problem
-
-
 
 
             userRepository.save(userModel);

@@ -37,13 +37,32 @@
 
 <div class="games-container">
     <h1>Games Joined</h1>
-    {{#gameModels}}
         <div class="game-item">
+            {{#userModel.gameModel}}
             <div><strong>ID:</strong> {{id}}</div>
-            <div><strong>Start Hour:</strong> {{startHour}}</div>
-            <div><strong>Location:</strong> {{pitchModel.location}}</div>
+            <div><strong>Start Hour:</strong> {{startTime}}</div>
+            <div><strong>Pitch::</strong> {{pitchModel.name}}</div>
+            {{/userModel.gameModel}}
         </div>
-    {{/gameModels}}
+</div>
+
+<div>
+    <h4>Pitches</h4>
+{{#pitchModel}}
+    <form action="/user/pitch/games" method="get">
+        <input type="hidden" name="userId" value="{{userModel.id}}">
+        <input type="hidden" name="pitchId" value="{{id}}">
+        <input type="submit" value="{{name}}">
+        <p>{{location}}</p>
+        <p>{{openTime}}</p>
+
+    </form>
+{{/pitchModel}}
+
+
+
+
+
 </div>
 
 </body>

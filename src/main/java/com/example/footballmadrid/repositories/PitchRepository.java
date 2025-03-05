@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PitchRepository extends JpaRepository<PitchModel, Long> {
+    public PitchModel getPitchModelById(Long id);
+
 }

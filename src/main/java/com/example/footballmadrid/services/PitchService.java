@@ -21,7 +21,9 @@ public class PitchService {
         return pitchRepository.findAll();
     }
 
-
+    public PitchModel getPitchModelById(Long id){
+        return pitchRepository.findById(id).get();
+    }
     public PitchModel save(PitchModel pitchModel){
         return pitchRepository.save(pitchModel);
     }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>{{gameModel.startTime}}</div>
+<p>players:</p>
+<div>
+
+    {{#gameModel.userModel}}
+
+        {{username}}
+
+    {{/gameModel.userModel}}
+
+</div>
+<div></div>
+<div>
+    <form method="get" action="/user/pitch/games">
+        <input type="hidden" name="userId" value={{userModel.id}}>
+        <input type="hidden" name="pitchId" value={{pitchModel.id}}>
+        <input type="submit" value="Return">
+    </form>
+
+    <form method="post" action="/user/games/details">
+        <input type="hidden" name="userId" value={{userModel.id}}>
+        <input type="hidden" name="gameId" value={{gameModel.id}}>
+        <button type="submit"  value="join"></button>
+
+    </form>
+</div>
+</body>
+</html>

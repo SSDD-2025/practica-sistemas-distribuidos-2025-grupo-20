@@ -1,7 +1,10 @@
 package com.example.footballmadrid.controllers;
 
+import com.example.footballmadrid.models.GameModel;
+import com.example.footballmadrid.models.PitchModel;
 import com.example.footballmadrid.models.UserModel;
-import com.example.footballmadrid.repositories.UserRepository;
+import com.example.footballmadrid.services.GameService;
+import com.example.footballmadrid.services.PitchService;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,11 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    private UserRepository userRepository;
+    PitchService pitchService;
+    @Autowired
+    GameService gameService;
+
+
 
 
     @GetMapping("/login")
@@ -27,6 +34,50 @@ public class UserController {
 
         return new ModelAndView("login",model);
     }
+    @GetMapping("/user/pitch/games")
+    public ModelAndView gameJoinMenu(@RequestParam Long userId,@RequestParam Long pitchId, Map<String,Object> model){
+
+        UserModel userModel = userService.findById(userId);
+        model.put("userModelId",userModel.getId());
+        PitchModel pitchModel = pitchService.getPitchModelById(pitchId);
+        List<GameModel> gameModel = gameService.findAllByPitchModel(pitchModel);
+        model.put("gameModel",gameModel);
+        model.put("pitchModel",pitchModel);
+
+        return new ModelAndView("JoinGameMenu",model);
+    }
+    @GetMapping("user/games/details")
+    public ModelAndView details(@RequestParam Long userId,@RequestParam String gameId,Map<String,Object> model){
+            UserModel userModel = userService.findById(userId);
+            model.put("userModel",userModel);
+            GameModel gameModel = gameService.findById(gameId);
+            model.put("gameModel",gameModel);
+            model.put("pitchModel",gameModel.getPitchModel());
+
+
+        return  new ModelAndView("gameDetails",model);
+    }
+    @PostMapping(value = "/user/games/details", params = {"userId","gameId"})
+    public ModelAndView joinGame(@RequestParam Long userId,@RequestParam String gameId,@RequestParam Map<String,Object> model){
+        GameModel gameModel = gameService.findById(gameId);
+        UserModel userModel = userService.findById(userId);
+
+        if(!gameModel.getUserModel().contains(userModel)) {
+            userService.joinGame(gameService.findById(gameId), userService.findById(userId));
+        }
+        else{
+            userService.leaveGame(gameModel,userModel);
+        }
+        model.put("userModel",userModel);
+        model.put("gameModel",gameModel);
+        model.put("pitchModel",gameModel.getPitchModel());
+
+        return   new ModelAndView("gameDetails",model);
+    }
+
+
+
+
     @PostMapping(value= "/login",params = {"username", "password"})
     public ModelAndView menu(@RequestParam String username,@RequestParam String password,Map<String,Object> model){
 
@@ -66,18 +117,20 @@ public class UserController {
 
         return new ModelAndView("accountSettings", model);
     }
-    @GetMapping("user/games")
-    public ModelAndView games(Map<String, Object> model) {
+    @GetMapping("/user/games")
+    public ModelAndView games(@RequestParam Long id, Map<String, Object> model) {
 
         model.put("title", "games");
 
 
-        UserModel userModel = (UserModel) model.get("userModel");
+        UserModel userModel = userService.findById(id);
+        List<PitchModel> pitchModel = pitchService.getPitches();
 
-        model.put("gameModels",userModel.getGameModel());
+        model.put("pitchModel", pitchModel);
+        model.put("userModel",userModel);
 
 
-        return new ModelAndView("gameFinder", model);
+        return new ModelAndView("pitchView", model);
     }
     @GetMapping(value = "/signUp")
     public ModelAndView getSignUp(Map<String, Object> model) {
@@ -111,7 +164,7 @@ public class UserController {
     public ModelAndView PostChangeUsername(@RequestParam Long id, @RequestParam String username, Map<String, Object> model) {
 
 
-        if(userRepository.findByUsername(username)!=null) {
+        if(userService.findByUsername(username)!=null) {
             model.put("id",id);
             model.put("userModel",userService.findById(id));
             model.put("message","username already in use");
