@@ -7,6 +7,8 @@ import com.example.footballmadrid.services.GameService;
 import com.example.footballmadrid.services.PitchService;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -141,14 +143,34 @@ public class UserController {
         return new ModelAndView("accountSettings", model);
     }
     @GetMapping("/user/games")
-    public ModelAndView games(@RequestParam Long id, Map<String, Object> model) {
+    public ModelAndView games(@RequestParam Long id, @RequestParam(required = false) Integer page,  Map<String, Object> model) {
+        int size = 1;
+        if(page == null)page = 0;
+        int maxSize = (int) pitchService.getPitches(page,size).getTotalElements();
+        Page<PitchModel> pageablePitchmodel = pitchService.getPitches(page, size);
+
+        boolean hasPrevious=pageablePitchmodel.hasPrevious();
+        boolean hasNext=pageablePitchmodel.hasNext();
+
+
+
+
 
         model.put("title", "games");
 
-
         UserModel userModel = userService.findById(id);
-        List<PitchModel> pitchModel = pitchService.getPitches();
+        List<PitchModel> pitchModel = pitchService.getPitches(page,size).getContent();
 
+        model.put("hasPrevious",hasPrevious);
+        int previous = page-1;
+        model.put("previousPage",previous);
+
+        model.put("hasNext",hasNext);
+        int next = page+1;
+        model.put("nextPage",next);
+
+
+        model.put("page",pitchModel);
         model.put("pitchModel", pitchModel);
         model.put("userModel",userModel);
 

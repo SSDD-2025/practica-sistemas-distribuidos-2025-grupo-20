@@ -22,6 +22,9 @@
             text-align: center;
             width: 300px;
         }
+        .blank-space{
+            height: 20px    ;
+        }
         h1 {
             margin-bottom: 15px;
         }
@@ -34,36 +37,46 @@
     </style>
 </head>
 <body>
+<div class="games-container">
+    <h4>Pitches</h4>
+    {{#pitchModel}}
 
+        <form action="/user/pitch/games" method="get">
+            <p>{{location}}</p>
+            <p>{{openTime}}</p>
+            <input type="hidden" name="userId" value="{{userModel.id}}">
+            <input type="hidden" name="pitchId" value="{{id}}">
+            <input type="submit" value="{{name}}">
+
+
+        </form>
+    {{/pitchModel}}
+    <div class="previous-next">
+        {{#hasPrevious}}
+            <a href="/user/games?id={{userModel.id}}&page={{previousPage}}">
+            <button> Previous</button>
+            </a>
+        {{/hasPrevious}}
+        {{#hasNext}}
+            <a href="/user/games?id={{userModel.id}}&page={{nextPage}}">
+            <button> next</button>
+            </a>
+        {{/hasNext}}
+    </div>
+</div>
 <div class="games-container">
     <h1>Games Joined</h1>
         <div class="game-item">
             {{#userModel.gameModel}}
-            <div><strong>ID:</strong> {{id}}</div>
             <div><strong>Start Hour:</strong> {{startTime}}</div>
+                <div>at</div>
             <div><strong>Pitch::</strong> {{pitchModel.name}}</div>
+                <div class="blank-space"> </div>
             {{/userModel.gameModel}}
         </div>
 </div>
 
-<div>
-    <h4>Pitches</h4>
-{{#pitchModel}}
-    <form action="/user/pitch/games" method="get">
-        <input type="hidden" name="userId" value="{{userModel.id}}">
-        <input type="hidden" name="pitchId" value="{{id}}">
-        <input type="submit" value="{{name}}">
-        <p>{{location}}</p>
-        <p>{{openTime}}</p>
 
-    </form>
-{{/pitchModel}}
-
-
-
-
-
-</div>
 
 </body>
 </html>

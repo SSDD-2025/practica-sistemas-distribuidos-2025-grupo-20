@@ -60,6 +60,34 @@ public void initDB() {
         GameModel gm4 =new GameModel("game4","16:00", pitchModel);
         gameRepository.save(gm4);
 
+        PitchModel pitchModel2 = new PitchModel("alcobendas_fc","alcobendas","10:00 - 00:00");
+        pitchRepository.save(pitchModel2);
+        GameModel gm5 =new GameModel("game5","10:00", pitchModel2);
+        gameRepository.save(gm5);
+        GameModel gm6 =new GameModel("game6","12:00", pitchModel2);
+        gameRepository.save(gm6);
+        GameModel gm7 =new GameModel("game7","14:00", pitchModel2);
+        gameRepository.save(gm7);
+        GameModel gm8 =new GameModel("game8","16:00", pitchModel2);
+        gameRepository.save(gm8);
+
+        PitchModel pitchModel3 = new PitchModel("algerciras_fc","algeciras","10:00 - 00:00");
+        pitchRepository.save(pitchModel3);
+        GameModel gm9 =new GameModel("game9","10:00", pitchModel3);
+        gameRepository.save(gm9);
+        GameModel gm10 =new GameModel("game10","12:00", pitchModel3);
+        gameRepository.save(gm10);
+        GameModel gm11 =new GameModel("game11","14:00", pitchModel3);
+        gameRepository.save(gm11);
+        GameModel gm12 =new GameModel("game12","16:00", pitchModel3);
+        gameRepository.save(gm12);
+
+
+
+
+
+
+
 
 
         userService.joinGame(gm1,um1);
@@ -69,7 +97,7 @@ public void initDB() {
         userService.joinGame(gm3,um4);
         userService.joinGame(gm2,um1);
 
-        userService.leaveGame(gm1,um1);
+
 
 
 

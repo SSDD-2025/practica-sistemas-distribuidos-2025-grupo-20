@@ -3,31 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body{
+            font-family: Arial,sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .container{
+            display: flex;
+        }
+        button{
+
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100px;
+            height: 35px;
+            border-radius: 5px;
+            margin: 10px;
+
+        }
+
+
+    </style>
+
+
+
+
 </head>
 <body>
+<div class="container">
+
 <div>
 {{#pitchModel}}
-    <p>pitch : {{name}}</p>
+    <h2>pitch : {{name}}</h2>
 
 {{/pitchModel}}
-</div>
+
 
 <div>
 {{#gameModel}}
 
         <form action="/user/games/details" method="get">
-            <p>{{id}}
+            <p>{{startTime}}
                 <input type="hidden" name="userId" value="{{userModelId}}">
                 <input type="hidden" name="gameId" value="{{id}}">
-                <input type="submit" value="Details">
+                <button type="submit">Details </button>
             </p>
         </form>
 
 {{/gameModel}}
         <form action="/user/games" method="get">
             <input type="hidden" name="id" value="{{userModelId}}">
-            <input type="submit" value="Return">
+            <button type="submit">return</button>
         </form>
+</div>
+</div>
 </div>
 </body>
 </html>
