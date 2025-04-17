@@ -1,7 +1,8 @@
 package com.example.footballmadrid.controllers;
 
-import com.example.footballmadrid.DTO.gameDTO;
-import com.example.footballmadrid.DTO.pitchmodelDTO;
+import com.example.footballmadrid.DTO.GameDTO;
+import com.example.footballmadrid.DTO.PitchmodelDTO;
+import com.example.footballmadrid.DTO.UsermodelDTO;
 import com.example.footballmadrid.models.GameModel;
 import com.example.footballmadrid.models.PitchModel;
 import com.example.footballmadrid.models.UserModel;
@@ -10,7 +11,6 @@ import com.example.footballmadrid.services.PitchService;
 import com.example.footballmadrid.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,15 +48,15 @@ public class UserController {
         PitchModel pitchModel = pitchService.getPitchModelById(pitchId);
         List<GameModel> gameModel = gameService.findAllByPitchModel(pitchModel);
 
-        List<gameDTO> gameDTOS = new ArrayList<>();
+        List<GameDTO> gameDTOS = new ArrayList<>();
         for (GameModel gameModel1 : gameModel) {
-            gameDTOS.add(new gameDTO(gameModel1));
+            gameDTOS.add(new GameDTO(gameModel1));
         }
 
 
         model.put("gameModel",gameDTOS);
 
-        pitchmodelDTO pitchmodelDTO = new pitchmodelDTO(pitchModel);
+        PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
         model.put("pitchModel",pitchmodelDTO);
 
@@ -75,8 +75,9 @@ public class UserController {
             model.put("status","join");
         }
 
-
-        model.put("userModel",userModel);
+        UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
+        
+        model.put("userModel",usermodelDTO);
         model.put("gameModel",gameModel);
         model.put("pitchModel",gameModel.getPitchModel());
 
