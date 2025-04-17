@@ -1,5 +1,7 @@
 package com.example.footballmadrid.controllers;
 
+import com.example.footballmadrid.DTO.gameDTO;
+import com.example.footballmadrid.DTO.pitchmodelDTO;
 import com.example.footballmadrid.models.GameModel;
 import com.example.footballmadrid.models.PitchModel;
 import com.example.footballmadrid.models.UserModel;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +47,18 @@ public class UserController {
         model.put("userModelId",userModel.getId());
         PitchModel pitchModel = pitchService.getPitchModelById(pitchId);
         List<GameModel> gameModel = gameService.findAllByPitchModel(pitchModel);
-        model.put("gameModel",gameModel);
-        model.put("pitchModel",pitchModel);
+
+        List<gameDTO> gameDTOS = new ArrayList<>();
+        for (GameModel gameModel1 : gameModel) {
+            gameDTOS.add(new gameDTO(gameModel1));
+        }
+
+
+        model.put("gameModel",gameDTOS);
+
+        pitchmodelDTO pitchmodelDTO = new pitchmodelDTO(pitchModel);
+
+        model.put("pitchModel",pitchmodelDTO);
 
         return new ModelAndView("JoinGameMenu",model);
     }
