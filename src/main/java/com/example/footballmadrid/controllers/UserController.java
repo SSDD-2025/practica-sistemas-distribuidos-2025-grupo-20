@@ -53,7 +53,6 @@ public class UserController {
             gameDTOS.add(new GameDTO(gameModel1));
         }
 
-
         model.put("gameModel",gameDTOS);
 
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
@@ -78,7 +77,13 @@ public class UserController {
         UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
         
         model.put("userModel",usermodelDTO);
+
+        GameDTO gameDTO = new GameDTO(gameModel);
+
         model.put("gameModel",gameModel);
+
+        PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
+
         model.put("pitchModel",gameModel.getPitchModel());
 
 
@@ -138,7 +143,7 @@ public class UserController {
         List users = userService.findAll();
         model.put("users", users);
         model.put("title", "<Users>");
-        return new ModelAndView("index", model);
+        return new ModelAndView("ind  ex", model);
     }
     @GetMapping("user/accountSettings")
     public ModelAndView accountSettings(@RequestParam Long id, Map<String, Object> model) {
