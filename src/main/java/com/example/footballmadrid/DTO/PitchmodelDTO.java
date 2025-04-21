@@ -6,6 +6,7 @@ public class PitchmodelDTO {
 
     String name;
     public PitchmodelDTO(PitchModel pitchModel){
+
         this.name=pitchModel.getName();
     }
 
