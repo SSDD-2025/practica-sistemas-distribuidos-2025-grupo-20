@@ -80,7 +80,7 @@ public class UserController {
 
         GameDTO gameDTO = new GameDTO(gameModel);
 
-        model.put("gameModel",gameModel);
+        model.put("gameModel",GameDTO);
 
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
@@ -111,11 +111,18 @@ public class UserController {
         else{
             model.put("status","join");
         }
-        model.put("userModel",userModel);
-        model.put("gameModel",gameModel);
+
+        UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
+
+        model.put("userModel",usermodelDTO);
+
+        GameDTO gameDTO = new GameDTO(gameModel);
+
+        model.put("gameModel",GameDTO);
+
+        PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
+
         model.put("pitchModel",gameModel.getPitchModel());
-
-
 
         return   new ModelAndView("redirect:/user/games/details",model  );
     }
