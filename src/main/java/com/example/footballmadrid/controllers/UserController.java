@@ -78,13 +78,14 @@ public class UserController {
         
         model.put("userModel",usermodelDTO);
 
-        GameDTO gameDTO = new GameDTO(gameModel);
-
-        model.put("gameModel",GameDTO);
+        List<GameDTO> gameDTOS = new ArrayList<>();
+        for (GameModel gameModel1 : gameModel) {
+            gameDTOS.add(new GameDTO(gameModel1));
+        }
 
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
-        model.put("pitchModel",gameModel.getPitchModel());
+        model.put("pitchModel",pitchmodelDTO);
 
 
 
@@ -116,13 +117,14 @@ public class UserController {
 
         model.put("userModel",usermodelDTO);
 
-        GameDTO gameDTO = new GameDTO(gameModel);
-
-        model.put("gameModel",GameDTO);
+        List<GameDTO> gameDTOS = new ArrayList<>();
+        for (GameModel gameModel1 : gameModel) {
+            gameDTOS.add(new GameDTO(gameModel1));
+        }
 
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
-        model.put("pitchModel",gameModel.getPitchModel());
+        model.put("pitchModel",pitchmodelDTO);
 
         return   new ModelAndView("redirect:/user/games/details",model  );
     }
