@@ -1,8 +1,6 @@
 package com.example.footballmadrid.controllers;
 
-import com.example.footballmadrid.DTO.GameDTO;
-import com.example.footballmadrid.DTO.PitchmodelDTO;
-import com.example.footballmadrid.DTO.UsermodelDTO;
+import com.example.footballmadrid.DTO.*;
 import com.example.footballmadrid.models.GameModel;
 import com.example.footballmadrid.models.PitchModel;
 import com.example.footballmadrid.models.UserModel;
@@ -141,8 +139,19 @@ public class UserController {
 
         if(userService.login(username,password)){
 
+            TitleDTO titleDTO = new TitleDTO();
+            LoginDTO loginDTO = new LoginDTO();
+
             model.put("title","login");
+
+            IdDTO idDTO = new IdDTO();
+
             model.put("id",userService.findByUsername(username).getId());
+
+            UsermodelDTO userModel = userModel.getPitchModel();
+
+            UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
+
             model.put("userModel",userService.findByUsername(username));
 
             return new  ModelAndView("menu",model);
