@@ -83,6 +83,8 @@ public class UserController {
             gameDTOS.add(new GameDTO(gameModel1));
         }
 
+        gameModel pitchModel = gameModel.getPitchModel();
+
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
         model.put("pitchModel",pitchmodelDTO);
@@ -121,6 +123,8 @@ public class UserController {
         for (GameModel gameModel1 : gameModel) {
             gameDTOS.add(new GameDTO(gameModel1));
         }
+
+        PitchModel pitchModel = gameModel.getPitchModel();
 
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
