@@ -142,17 +142,17 @@ public class UserController {
             TitleDTO titleDTO = new TitleDTO();
             LoginDTO loginDTO = new LoginDTO();
 
-            model.put("title","login");
+            model.put("title","login", titleDTO, loginDTO);
 
             IdDTO idDTO = new IdDTO();
 
-            model.put("id",userService.findByUsername(username).getId());
+            model.put("id",idDTO);
 
             UsermodelDTO userModel = userModel.getPitchModel();
 
             UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
 
-            model.put("userModel",userService.findByUsername(username));
+            model.put("userModel",usermodelDTO);
 
             return new  ModelAndView("menu",model);
         }
@@ -163,23 +163,48 @@ public class UserController {
     public ModelAndView findUsers(Map<String, Object> model) {
 
         List users = userService.findAll();
-        model.put("users", users);
-        model.put("title", "<Users>");
+
+        UsersDTO usersDTO = UsersDTO(users);
+
+        model.put("users", usersDTO);
+
+        TitleDTO titleDTO = new TitleDTO();
+
+        model.put("title", "<Users>", titleDTO);
         return new ModelAndView("ind  ex", model);
     }
     @GetMapping("user/accountSettings")
     public ModelAndView accountSettings(@RequestParam Long id, Map<String, Object> model) {
 
-        model.put("id",id);
-        model.put("userModel",userService.findById(id) );
+        IdDTO idDTO = new IdDTO();
+
+        model.put("id",idDTO);
+
+        UsermodelDTO userModel = new UsermodelDTO(userModel);
+
+        model.put("userModel", userModel);
+
+        TitleDTO titleDTO = new TitleDTO();
+
         model.put("title", "accountSettings");
 
         return new ModelAndView("accountSettings", model);
     }
     @PostMapping(value = "user/accountSettings", params = {"id"})
     public ModelAndView PostAccountSettings(@RequestParam Long id, Map<String, Object> model) {
-        model.put("id", id);
-        model.put("userModel",userService.findById(id) );
+
+        IdDTO idDTO = new IdDTO();
+
+        model.put("id",idDTO);
+
+        UserModel userModel = userService.findById(id);
+
+        UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
+
+        model.put("userModel",usermodelDTO);
+
+        model.put("userModel", usermodelDTO);
+
         model.put("title", "accountSettings");
 
         return new ModelAndView("accountSettings", model);
