@@ -97,8 +97,6 @@ public class UserController {
         UserModel userModel = userService.findById(userId);
         gameService.checkJoined(gameModel,userModel);
 
-
-
         if(!gameModel.getUserModel().contains(userModel)) {
             userService.joinGame(gameService.findById(gameId), userService.findById(userId));
         }
@@ -221,10 +219,6 @@ public class UserController {
 
         boolean hasPrevious=pageablePitchmodel.hasPrevious();
         boolean hasNext=pageablePitchmodel.hasNext();
-
-
-
-
 
         model.put("title", "games");
 
