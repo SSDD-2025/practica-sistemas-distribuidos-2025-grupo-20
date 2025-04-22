@@ -76,12 +76,12 @@ public class UserController {
         
         model.put("userModel",usermodelDTO);
 
-        List<GameDTO> gameDTOS = new ArrayList<>();
+        List<GameDTO> gameDTO = new ArrayList<>();
         for (GameModel gameModel1 : gameModel) {
-            gameDTOS.add(new GameDTO(gameModel1));
+            gameDTO.add(new GameDTO(gameModel1));
         }
 
-        gameModel pitchModel = gameModel.getPitchModel();
+        PitchModel pitchModel = gameModel.getPitchModel();
 
         PitchmodelDTO pitchmodelDTO = new PitchmodelDTO(pitchModel);
 
@@ -142,13 +142,15 @@ public class UserController {
             TitleDTO titleDTO = new TitleDTO();
             LoginDTO loginDTO = new LoginDTO();
 
-            model.put("title","login", titleDTO, loginDTO);
+            model.put("title", titleDTO);
+
+            model.put("login", loginDTO);
 
             IdDTO idDTO = new IdDTO();
 
             model.put("id",idDTO);
 
-            UsermodelDTO userModel = userModel.getPitchModel();
+            UserModel userModel = UserModel.getPitchModel();
 
             UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
 
@@ -164,13 +166,16 @@ public class UserController {
 
         List users = userService.findAll();
 
-        UsersDTO usersDTO = UsersDTO(users);
+        UsersDTO usersDTO = new UsersDTO(users);
 
         model.put("users", usersDTO);
 
         TitleDTO titleDTO = new TitleDTO();
 
-        model.put("title", "<Users>", titleDTO);
+        model.put("title", "<Users>");
+
+
+
         return new ModelAndView("ind  ex", model);
     }
     @GetMapping("user/accountSettings")
@@ -202,8 +207,6 @@ public class UserController {
         UsermodelDTO usermodelDTO = new UsermodelDTO(userModel);
 
         model.put("userModel",usermodelDTO);
-
-        model.put("userModel", usermodelDTO);
 
         model.put("title", "accountSettings");
 
