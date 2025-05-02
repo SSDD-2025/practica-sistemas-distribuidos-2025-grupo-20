@@ -77,9 +77,10 @@ public class UserController {
         model.put("userModel",usermodelDTO);
 
         List<GameDTO> gameDTO = new ArrayList<>();
-        for (GameModel gameModel1 : gameModel) {
-            gameDTO.add(new GameDTO(gameModel1));
+        for (int i=0; i < userModel.getGameModel().size(); i++ ){
+            gameDTO.add(new GameDTO(userModel.getGameModel().get(i)));
         }
+        model.put("gameModel",gameDTO);
 
         PitchModel pitchModel = gameModel.getPitchModel();
 
@@ -115,10 +116,11 @@ public class UserController {
 
         model.put("userModel",usermodelDTO);
 
-        List<GameDTO> gameDTOS = new ArrayList<>();
-        for (GameModel gameModel1 : gameModel) {
-            gameDTOS.add(new GameDTO(gameModel1));
+        List<GameDTO> gameDTO = new ArrayList<>();
+        for (int i=0; i < userModel.getGameModel().size(); i++ ){
+            gameDTO.add(new GameDTO(userModel.getGameModel().get(i)));
         }
+        model.put("gameModel",gameDTO);
 
         PitchModel pitchModel = gameModel.getPitchModel();
 
@@ -164,7 +166,11 @@ public class UserController {
 
         List users = userService.findAll();
 
-        UsersDTO usersDTO = new UsersDTO(users);
+        List<UsermodelDTO> usersDTO = new ArrayList<>();
+        for (int i=0; i < users.size(); i++ ){
+            usersDTO.add(new UsermodelDTO((UserModel) users.get(i)));
+        }
+        model.put("gameModel",usersDTO);
 
         model.put("users", usersDTO);
 
@@ -183,7 +189,7 @@ public class UserController {
 
         model.put("id",idDTO);
 
-        UsermodelDTO userModel = new UsermodelDTO(userModel);
+        UsermodelDTO userModel = new UsermodelDTO(userService.findById(id));
 
         model.put("userModel", userModel);
 
